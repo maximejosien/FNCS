@@ -1,12 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import PropTypes from 'prop-types';
+import { UserPanel } from './UserPanel';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+export default function App({ name }) {
+  return React.createElement(UserPanel, { email: 'mail@gmail.com' })
+}
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+export class AppClass extends React.Component {
+  render() {
+    return React.createElement(UserPanel, { email: 'maxime.jsn@gmail.com', firstName: 'Maxime', lastName: 'JOSIEN' })
+  }
+}
+
+App.propTypes = {
+  name: PropTypes.string.isRequired
+};
+
+App.defaultProps = {
+  name: 'Maxime'
+};
+
+ReactDOM.render(React.createElement(AppClass, {}, null), document.getElementById('root'));
