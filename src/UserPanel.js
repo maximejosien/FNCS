@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import md5 from 'md5';
+import emailPropType from 'email-prop-type';
 
 export class UserPanel extends React.Component {
 
@@ -15,7 +16,7 @@ export class UserPanel extends React.Component {
 
 
 UserPanel.propTypes = {
-  email: PropTypes.string.isRequired,
+  email: emailPropType.isRequired,
   firstName: PropTypes.string.isRequired,
   lastName: PropTypes.string.isRequired,
 };
