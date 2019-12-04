@@ -3,28 +3,24 @@ import PropTypes from 'prop-types';
 import md5 from 'md5';
 import emailPropType from 'email-prop-type';
 
-export class UserPanel extends React.Component {
-
-  render() {
-    return React.createElement('div', { style: { width: '18rem'} }, [
-        React.createElement('img', { src: 'https://www.gravatar.com/avatar/' + md5(this.props.email), className: 'card-img-top' }),
-        React.createElement('div', { className: 'card-body' },
-          React.createElement('h5', { className: 'card-title' }, this.props.firstName + ' ' + this.props.lastName))
-      ]);
-  }
+export function UserPanel({ email, firstName, lastName}) {
+  return (
+    <>
+      {
+        <div className="card" style={{width: '18rem'}}>
+          <img src={'https://www.gravatar.com/avatar/' + md5(email)} className="card-img-top" alt="hello"/>
+          <div className="card-body">
+            <h5 className="card-title">{ firstName + lastName}</h5>
+            <a href="http://google.com" className="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      }
+    </>
+  );
 }
-
 
 UserPanel.propTypes = {
   email: emailPropType.isRequired,
   firstName: PropTypes.string.isRequired,
   lastName: PropTypes.string.isRequired,
 };
-
-// UserPanel.defaultProps = {
-//   firstName: 'Maxime',
-//   lastName: 'JOSIEN',
-//   email: 'maxime.jsn@gmail.com',
-// };
-
-// ReactDOM.render(React.createElement(UserPanelClass, {}, null), document.getElementById('root'));
