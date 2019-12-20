@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import md5 from 'md5';
 import emailPropType from 'email-prop-type';
 
-export function UserPanel({ email, firstName, lastName}) {
+export function UserPanel({email, firstName, lastName}) {
   return (
     <>
       {

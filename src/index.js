@@ -1,5 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { UserPanel } from './UserPanel';
+// import { UserPanel } from './UserPanel';
+import SearchStation from './SearchStation.js'
 
-ReactDOM.render(<UserPanel email="maxime.jsn@gmail.com" firstName="Maxime" lastName="JOSIEN"/>, document.getElementById('root'));
+function App({ isLogged }) {
+  // const name = 'Maxime';
+  // const welcoming = <p>Bonjour {name}</p>;
+
+  return (
+    <>
+    {
+      <>
+        <SearchStation></SearchStation>
+        {/*<UserPanel lastName="Maxime" firstName="JOSIEN" email="maxime.jsn@gmail.com"/>*/}
+      </>
+    }
+    </>
+  )
+}
+
+ReactDOM.render(<App isLogged={true}/>, document.getElementById('root'));
+
+
+// ReactDOM.render(React.createElement(UserPanel, { email: 'maxime.jsn@gmail.com', firstName: 'Maxime', lastName: 'JOSIEN' }), document.getElementById('root'));
