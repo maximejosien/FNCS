@@ -14,7 +14,7 @@ export default class GetStations extends React.Component {
       });
       return;
     }
-    const SNCFRailwayReferentialResponse = fetch('https://ressources.data.sncf.com/api/records/1.0/search/?dataset=referentiel-gares-voyageurs&q=' + this.props.address);
+    const SNCFRailwayReferentialResponse = this.fetchSNCF();
     const responseJson = (await SNCFRailwayReferentialResponse).json();
 
     const railwayStations = (await responseJson).records.map(value => {
@@ -24,6 +24,9 @@ export default class GetStations extends React.Component {
     this.setState({
       stations: [...new Set(await railwayStations)]
     });
+  }
+  fetchSNCF() {
+    return fetch('https://ressources.data.sncf.com/api/records/1.0/search/?dataset=referentiel-gares-voyageurs&q=' + this.props.address);
   }
   componentDidMount() {
     this.stockRailwayStations();

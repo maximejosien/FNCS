@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import { UserPanel } from './UserPanel';
-import SearchStation from './SearchStation.js'
+import UserPanel from './UserPanel';
+// import SearchStation from './SearchStation.js'
 
 function App({ isLogged }) {
   // const name = 'Maxime';
@@ -11,8 +11,8 @@ function App({ isLogged }) {
     <>
     {
       <>
-        <SearchStation></SearchStation>
-        {/*<UserPanel lastName="Maxime" firstName="JOSIEN" email="maxime.jsn@gmail.com"/>*/}
+        {/*<SearchStation></SearchStation>*/}
+        <UserPanel lastName="Maxime" firstName="JOSIEN"/>
       </>
     }
     </>
