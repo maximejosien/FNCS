@@ -4,6 +4,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/jest": "^24.9.0",
+    "@types/node": "^13.1.8",
+    "@types/react": "^16.9.19",
+    "@types/react-dom": "^16.9.5",
     "bootstrap": "^4.4.1",
     "email-prop-type": "^3.0.0",
     "md5": "^2.2.1",
@@ -11,7 +15,8 @@
     "react-bootstrap": "^1.0.0-beta.16",
     "react-dom": "^16.12.0",
     "react-scripts": "3.2.0",
-    "reactstrap": "^8.1.1"
+    "reactstrap": "^8.1.1",
+    "typescript": "^3.7.5"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -36,6 +41,7 @@
     ]
   },
   "devDependencies": {
+    "@types/prop-types": "^15.7.3",
     "cypress": "3.8.2"
   }
 }

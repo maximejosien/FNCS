@@ -1,7 +1,7 @@
 import React from 'react';
 import GetStations from "./GetStations";
 
-export default class SearchStation extends React.Component {
+export default class SearchStation extends React.Component<any, any> {
   constructor(props) {
     super(props);
     this.state = {

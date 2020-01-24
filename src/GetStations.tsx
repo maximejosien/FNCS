@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class GetStations extends React.Component {
+export default class GetStations extends React.Component<any, any> {
   constructor(props) {
     super(props);
     this.state = {
