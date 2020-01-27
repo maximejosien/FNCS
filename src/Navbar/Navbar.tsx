@@ -19,33 +19,48 @@ export default class Navbar extends Component<NavbarProps, NavbarState> {
             loginSectionActive: 'none-active'
         }
     }
+
     isHomeSection() {
         this.setState({
             homeSectionActive: 'active',
             loginSectionActive: 'none-active'
         })
     }
+
     isLoginSection() {
         this.setState({
             homeSectionActive: 'none-active',
             loginSectionActive: 'active'
         })
     }
+
     render() {
-        let login;
-        let logout;
+        let disconnected;
+        let connected;
 
         if (!this.props.connected) {
-            login = <Link className={this.state.loginSectionActive} onClick={this.isLoginSection.bind(this)} to='/login'>Connexion</Link>;
+            disconnected = (
+                <>
+                    <Link className={this.state.homeSectionActive} onClick={this.isHomeSection.bind(this)}
+                          to='/'>Accueil</Link>
+                    <Link className={this.state.loginSectionActive} onClick={this.isLoginSection.bind(this)}
+                          to='/login'>Connexion</Link>
+                </>
+            );
         } else {
-            logout = <Link to='/logout'>Déconnexion</Link>;
+            connected = (
+                <>
+                    <Link className={this.state.homeSectionActive} onClick={this.isHomeSection.bind(this)}
+                          to='/purchase'>Accueil</Link>
+                    <Link to='/logout'>Déconnexion</Link>
+                </>
+            );
         }
 
         return (
             <div className="topnav">
-                <Link className={this.state.homeSectionActive} onClick={this.isHomeSection.bind(this)} to='/'>Accueil</Link>
-                {login}
-                {logout}
+                {disconnected}
+                {connected}
             </div>
         )
     }
