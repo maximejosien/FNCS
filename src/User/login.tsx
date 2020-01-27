@@ -56,15 +56,17 @@ export default class Login extends Component<LoginProps, LoginState> {
     }
     render() {
         return (
-          <div className="login-page">
-            <div className="form">
-              <form onSubmit={this.onSubmitForm.bind(this)} className="login-form">
-                <input type="text" placeholder="Email" defaultValue={this.state.email} onChange={this.onChangeEmail.bind(this)}/>
-                <input type="password" placeholder="Mot de passe" defaultValue={this.state.password} onChange={this.onChangePassword.bind(this)}/>
-                <button type="submit">login</button>
-              </form>
+            <div className="container">
+                <div className="row">
+                  <form id="formLogin" onSubmit={this.onSubmitForm.bind(this)}>
+                    <input type="text" className="form-control" placeholder="Email" defaultValue={this.state.email} onChange={this.onChangeEmail.bind(this)}/>
+                    <br/>
+                    <input type="password" className="form-control" placeholder="Mot de passe" defaultValue={this.state.password} onChange={this.onChangePassword.bind(this)}/>
+                    <br/>
+                    <button type="submit" className="form-control">login</button>
+                  </form>
+                </div>
             </div>
-          </div>
         )
     }
 }

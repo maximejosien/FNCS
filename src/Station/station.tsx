@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './station.css';
+import Purchase from "../Purchase/purchase";
 
 interface StationProps {
 }
@@ -7,10 +8,13 @@ interface StationProps {
 interface StationStates {
     departureStation: string,
     arrivalStation: string,
+    departureStationSave: string,
+    arrivalStationSave: string,
     departureListStations: any,
     arrivalListStations: any,
     displayDepartureList: boolean,
-    displayArrivalList: boolean
+    displayArrivalList: boolean,
+    searchEnabled: boolean
 }
 
 export default class Station extends Component<StationProps, StationStates> {
@@ -19,10 +23,13 @@ export default class Station extends Component<StationProps, StationStates> {
         this.state = {
             departureStation: '',
             arrivalStation: '',
+            departureStationSave: '',
+            arrivalStationSave: '',
             departureListStations: [],
             arrivalListStations: [],
             displayDepartureList: false,
             displayArrivalList: false,
+            searchEnabled: false
         }
     }
     async displayDepartureListStations() {
@@ -88,6 +95,14 @@ export default class Station extends Component<StationProps, StationStates> {
             displayArrivalList: false,
         });
     }
+    onSubmitForm(event) {
+        this.setState({
+            departureStationSave: this.state.departureStation,
+            arrivalStationSave: this.state.arrivalStation,
+            searchEnabled: true
+        });
+        event.preventDefault();
+    }
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (this.state.departureStation !== prevState.departureStation) {
             this.displayDepartureListStations();
@@ -105,6 +120,7 @@ export default class Station extends Component<StationProps, StationStates> {
     render() {
         let listDeparture;
         let listArrival;
+        let search;
 
         if (this.state.displayDepartureList) {
             listDeparture = (
@@ -124,18 +140,21 @@ export default class Station extends Component<StationProps, StationStates> {
                 </>
             );
         }
+        if (this.state.searchEnabled) {
+            search = <Purchase/>
+        }
         return (
-            <div className="container">
+            <div id="formStation" className="container">
                 <div className="row">
-                    <form className="col-lg-6">
+                    <form className="col-lg-6" onSubmit={this.onSubmitForm.bind(this)}>
                         <p>Quel est votre trajet ?</p>
-                        <input type="text" placeholder="Saisir votre gare de départ..." value={this.state.departureStation} onChange={this.onChangeDepartureStation.bind(this)}/>
+                        <input type="text" className="form-control" placeholder="Saisir votre gare de départ..." value={this.state.departureStation} onChange={this.onChangeDepartureStation.bind(this)}/>
                         <br/>
-                        <input type="text" placeholder="Saisir votre gare de d'arrivée..."  value={this.state.arrivalStation} onChange={this.onChangeArrivalStation.bind(this)}/>
+                        <input type="text" className="form-control" placeholder="Saisir votre gare de d'arrivée..."  value={this.state.arrivalStation} onChange={this.onChangeArrivalStation.bind(this)}/>
                         <br/>
-                        <input type="date"/>
+                        <input type="date" className="form-control"/>
                         <br/>
-                        <input type="submit"/>
+                        <input type="submit" className="form-control"/>
                     </form>
                     <div className="col-lg-6">
                         <ul className="list-group">
@@ -143,6 +162,9 @@ export default class Station extends Component<StationProps, StationStates> {
                             {listArrival}
                         </ul>
                     </div>
+                </div>
+                <div className="row">
+                    {search}
                 </div>
             </div>
         );
