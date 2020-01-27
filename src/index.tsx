@@ -4,7 +4,7 @@ import Navbar from './Navbar/Navbar';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import Login from "./User/login";
 import Logout from "./User/logout";
-import Purchase from "./Purchase/purchase";
+import Station from "./Station/station";
 
 export default function App() {
     let connected = false;
@@ -18,7 +18,7 @@ export default function App() {
                 <Navbar connected={connected}/>
                 <Route path="/login" component={Login}/>
                 <Route path="/logout" component={Logout}/>
-                <Route path="/purchase" component={Purchase}/>
+                <Route path="/purchase" component={Station}/>
             </Router>
         </div>
     );
