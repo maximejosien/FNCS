@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import md5 from 'md5';
 import emailPropType from 'email-prop-type';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 interface UserPanelProps {
   firstName: string,
@@ -35,6 +36,10 @@ export default class UserPanel extends React.Component<UserPanelProps, any> {
           <a href="http://google.com" className="btn btn-primary">Go somewhere</a>
         </div>
         <input type="text" className="form-control" defaultValue={this.state.email} onChange={this.onChangeInput.bind(this)}/>
+        <Router>
+          <h1>HELLO</h1>
+          <Route path="/" components={UserPanel}/>
+        </Router>
       </div>
     );
   }

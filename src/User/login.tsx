@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
+import './login.css';
 
-interface AuthenticationProps {
+interface LoginProps {
 }
 
-interface AuthenticationState {
+interface LoginState {
     email: string,
     password: string
 }
 
-export default class Authentication extends Component<AuthenticationProps, AuthenticationState> {
+export default class Login extends Component<LoginProps, LoginState> {
     constructor(props) {
         super(props);
         this.state = {
@@ -26,7 +27,7 @@ export default class Authentication extends Component<AuthenticationProps, Authe
             password: event.target.value
         });
     }
-    async authenticate() {
+    async login() {
         const loginResponse = this.fetchLogin();
         const responseJson = (await loginResponse).json();
 
@@ -50,18 +51,20 @@ export default class Authentication extends Component<AuthenticationProps, Authe
         });
     }
     onSubmitForm(event) {
-        this.authenticate();
+        this.login();
         event.preventDefault();
     }
     render() {
         return (
-            <div>
-                <form onSubmit={this.onSubmitForm.bind(this)}>
-                    <input type="text" defaultValue={this.state.email} onChange={this.onChangeEmail.bind(this)}/>
-                    <input type="text" defaultValue={this.state.password} onChange={this.onChangePassword.bind(this)}/>
-                    <input type="submit" value="Se connecter"/>
-                </form>
+          <div className="login-page">
+            <div className="form">
+              <form onSubmit={this.onSubmitForm.bind(this)} className="login-form">
+                <input type="text" placeholder="Email" defaultValue={this.state.email} onChange={this.onChangeEmail.bind(this)}/>
+                <input type="password" placeholder="Mot de passe" defaultValue={this.state.password} onChange={this.onChangePassword.bind(this)}/>
+                <button type="submit">login</button>
+              </form>
             </div>
+          </div>
         )
     }
 }

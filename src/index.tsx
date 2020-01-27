@@ -1,25 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import UserPanel from './UserPanel';
-// import SearchStation from './SearchStation.js'
+import Navbar from './Navbar/Navbar';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+import Login from "./User/login";
+import Logout from "./User/logout";
 
-function App({ isLogged }) {
-  // const name = 'Maxime';
-  // const welcoming = <p>Bonjour {name}</p>;
+export default function App() {
+    let connected = false;
 
-  return (
-    <>
-    {
-      <>
-        {/*<SearchStation></SearchStation>*/}
-        <UserPanel lastName="Maxime" firstName="JOSIEN"/>
-      </>
+    if (localStorage.getItem('auth_token')) {
+        connected = true;
     }
-    </>
-  )
+    return (
+        <div className="App">
+            <Router>
+                <Navbar connected={connected}/>
+                <Route path="/login" component={Login}/>
+                <Route path="/logout" component={Logout}/>
+            </Router>
+        </div>
+    );
 }
 
-ReactDOM.render(<App isLogged={true}/>, document.getElementById('root'));
-
-
-// ReactDOM.render(React.createElement(UserPanel, { email: 'maxime.jsn@gmail.com', firstName: 'Maxime', lastName: 'JOSIEN' }), document.getElementById('root'));
+ReactDOM.render(<App/>, document.getElementById('root'));
