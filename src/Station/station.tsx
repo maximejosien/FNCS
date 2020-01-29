@@ -141,7 +141,7 @@ export default class Station extends Component<StationProps, StationStates> {
             );
         }
         if (this.state.searchEnabled) {
-            search = <Purchase/>
+            search = <Purchase departureStation={this.state.departureStation} arrivalStation={this.state.arrivalStation}/>
         }
         return (
             <div id="formStation" className="container">

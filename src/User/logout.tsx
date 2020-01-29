@@ -10,6 +10,7 @@ interface LogoutState {
 export default class Logout extends Component<LogoutProps, LogoutState> {
     componentDidMount() {
         localStorage.removeItem('auth_token');
+        window.location.assign("/");
     }
     render() {
         return <Redirect to="/"/>

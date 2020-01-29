@@ -1,0 +1,13 @@
+#purchaseBlock {
+    margin: 80px 0;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #4CAF50;
+}
+
+.schedule {
+    padding-top: 20px;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-bottom-color: rgba(81, 81, 81, 0.62);
+}

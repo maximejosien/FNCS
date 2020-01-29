@@ -8,7 +8,8 @@ interface NavbarProps {
 
 interface NavbarState {
     homeSectionActive: string,
-    loginSectionActive: string
+    loginSectionActive: string,
+    profileSectionActive: string
 }
 
 export default class Navbar extends Component<NavbarProps, NavbarState> {
@@ -16,21 +17,31 @@ export default class Navbar extends Component<NavbarProps, NavbarState> {
         super(props);
         this.state = {
             homeSectionActive: 'active',
-            loginSectionActive: 'none-active'
+            loginSectionActive: 'none-active',
+            profileSectionActive: 'none-active'
         }
     }
 
     isHomeSection() {
         this.setState({
             homeSectionActive: 'active',
-            loginSectionActive: 'none-active'
+            loginSectionActive: 'none-active',
+            profileSectionActive: 'none-active'
         })
     }
 
     isLoginSection() {
         this.setState({
             homeSectionActive: 'none-active',
-            loginSectionActive: 'active'
+            loginSectionActive: 'active',
+            profileSectionActive: 'none-active'
+        })
+    }
+    isProfileSection() {
+        this.setState({
+            homeSectionActive: 'none-active',
+            loginSectionActive: 'none-active',
+            profileSectionActive: 'active'
         })
     }
 
@@ -52,6 +63,8 @@ export default class Navbar extends Component<NavbarProps, NavbarState> {
                 <>
                     <Link className={this.state.homeSectionActive} onClick={this.isHomeSection.bind(this)}
                           to='/purchase'>Accueil</Link>
+                    <Link className={this.state.profileSectionActive} onClick={this.isProfileSection.bind(this)}
+                          to='/profile'>Mon compte</Link>
                     <Link to='/logout'>Déconnexion</Link>
                 </>
             );

@@ -5,6 +5,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 import Login from "./User/login";
 import Logout from "./User/logout";
 import Station from "./Station/station";
+import Profile from "./Profil/profile";
 
 export default function App() {
     let connected = false;
@@ -19,6 +20,7 @@ export default function App() {
                 <Route path="/login" component={Login}/>
                 <Route path="/logout" component={Logout}/>
                 <Route path="/purchase" component={Station}/>
+                <Route path="/profile" component={Profile}/>
             </Router>
         </div>
     );
