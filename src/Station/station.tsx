@@ -118,31 +118,6 @@ export default class Station extends Component<StationProps, StationStates> {
         }
     }
     render() {
-        let listDeparture;
-        let listArrival;
-        let search;
-
-        if (this.state.displayDepartureList) {
-            listDeparture = (
-                <>
-                    {this.state.departureListStations.map((d, idx) => {
-                        return (<li onClick={this.handleCheckDeparture.bind(this)} className="list-group-item" key={idx}>{d}</li>)
-                    })}
-                </>
-            );
-        }
-        if (this.state.displayArrivalList) {
-            listArrival = (
-                <>
-                    {this.state.arrivalListStations.map((d, idx) => {
-                        return (<li onClick={this.handleCheckArrival.bind(this)} className="list-group-item" key={idx}>{d}</li>)
-                    })}
-                </>
-            );
-        }
-        if (this.state.searchEnabled) {
-            search = <Purchase departureStation={this.state.departureStation} arrivalStation={this.state.arrivalStation}/>
-        }
         return (
             <div id="formStation" className="container">
                 <div className="row">
@@ -157,14 +132,20 @@ export default class Station extends Component<StationProps, StationStates> {
                         <input type="submit" className="form-control"/>
                     </form>
                     <div className="col-lg-6">
-                        <ul className="list-group">
-                            {listDeparture}
-                            {listArrival}
+                        <ul className="list-group" style={{ display: this.state.displayDepartureList ? 'block' : 'none' }}>
+                            {this.state.departureListStations.map((d, idx) => {
+                                return (<li onClick={this.handleCheckDeparture.bind(this)} className="list-group-item" key={idx}>{d}</li>)
+                            })}
+                        </ul>
+                        <ul className="list-group" style={{ display: this.state.displayArrivalList ? 'block' : 'none' }}>
+                            {this.state.arrivalListStations.map((d, idx) => {
+                                return (<li onClick={this.handleCheckArrival.bind(this)} className="list-group-item" key={idx}>{d}</li>)
+                            })}
                         </ul>
                     </div>
                 </div>
-                <div className="row">
-                    {search}
+                <div className="row" style={{ display: this.state.searchEnabled ? 'block' : 'none' }}>
+                    <Purchase departureStation={this.state.departureStation} arrivalStation={this.state.arrivalStation}/>
                 </div>
             </div>
         );

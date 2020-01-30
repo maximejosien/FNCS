@@ -36,6 +36,7 @@ export default class Login extends Component<LoginProps, LoginState> {
         }
 
         localStorage.setItem('auth_token', (await responseJson).token);
+        localStorage.setItem('email', this.state.email);
         window.location.assign("/purchase");
     }
     fetchLogin() {

@@ -7,51 +7,60 @@ interface PurchaseBlockProps {
 }
 
 interface PurchaseBlockStates {
-    buttonPressed: boolean
+    priceTicket: number
 }
 
 export default class PurchaseBlock extends Component<PurchaseBlockProps, PurchaseBlockStates> {
     constructor(props) {
         super(props);
         this.state = {
-            buttonPressed: false
-        }
+            priceTicket: 20,
+        };
+    }
+    getListStationsPurchased() {
+        const stations = localStorage.getItem('stations');
+
+        return stations ? JSON.parse(stations) : [];
     }
     saveStationBought() {
-        if (this.state.buttonPressed) {
+        const stations = this.getListStationsPurchased();
 
-            const stations = {
-                'basicHash': {
-                    arrivalStation: this.props.arrivalStation,
-                    departureStation: this.props.departureStation
-                }
-            };
-        }
+        let newStation = [this.props.arrivalStation, this.props.departureStation, this.getPriceReduction()];
+
+        stations.push(newStation);
+
+        localStorage.setItem('stations', JSON.stringify(stations));
     }
     onClickBuyingButton(event) {
-        this.setState({
-            buttonPressed: !this.state.buttonPressed
-        });
         this.saveStationBought();
-        event.preventDefault();
     }
-    getCorrectButton() {
-        if (this.state.buttonPressed) {
-          return <button onClick={this.onClickBuyingButton.bind(this)} className="form-control button-enabled">Acheter</button>;
-        }
+    getPriceReduction() {
+        const promoCode = localStorage.getItem('promoCode');
 
-        return <button onClick={this.onClickBuyingButton.bind(this)} className="form-control button-disabled">Acheter</button>;
+        return promoCode ? this.state.priceTicket / 2 : this.state.priceTicket;
+    }
+    getDisplayPrice() {
+        return (
+            <div>
+                <p style={{ textDecoration: this.getPriceReduction() !== this.state.priceTicket ? 'line-through' : ''}}>{this.state.priceTicket}€</p>
+                <p style={{ display: this.getPriceReduction() !== this.state.priceTicket ? 'block' : 'none' }}>Prix après réduction : {this.getPriceReduction()}€</p>
+            </div>
+        );
     }
     render() {
         return (
             <div className="row schedule">
-                <div className="col-lg-6">
+                <div className="col-lg-3">
                     <p>{this.props.departureStation}</p>
                     <hr/>
                     <p>{this.props.arrivalStation}</p>
                 </div>
-                <form className="col-lg-6">
-                    {this.getCorrectButton()}
+                <div className="col-lg-3">
+                    {this.getDisplayPrice()}
+                </div>
+                <form onSubmit={this.onClickBuyingButton.bind(this)} className="col-lg-6">
+                    <input type="submit" value="Acheter"
+                           className="form-control"/>
                 </form>
             </div>
         );

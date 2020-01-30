@@ -1,0 +1,9 @@
+.profile-block {
+    margin: 80px 0;
+}
+
+.border-tickets {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #4CAF50;
+}

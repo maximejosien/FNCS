@@ -33,13 +33,11 @@ export default class Purchase extends Component<PurchaseProps, PurchaseStates> {
         this.computeStation();
     }
     render() {
-        const items = this.state.stationList.map((item, key) =>
-            <PurchaseBlock key={key} departureStation={this.props.departureStation} arrivalStation={this.props.arrivalStation}/>
-        );
-
         return (
             <div id="purchaseBlock" className="col-lg-12">
-                {items}
+                {this.state.stationList.map((item, key) =>
+                    <PurchaseBlock key={key} departureStation={this.props.departureStation} arrivalStation={this.props.arrivalStation}/>
+                )}
             </div>
         );
     }

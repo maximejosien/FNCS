@@ -5,7 +5,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 import Login from "./User/login";
 import Logout from "./User/logout";
 import Station from "./Station/station";
-import Profile from "./Profil/profile";
+import Profile from "./Profile/profile";
 
 export default function App() {
     let connected = false;
