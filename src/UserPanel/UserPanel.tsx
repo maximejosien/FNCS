@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import md5 from 'md5';
 import emailPropType from 'email-prop-type';
+import { Redirect } from 'react-router-dom';
 
 interface UserPanelProps {
     firstName: string,
@@ -10,7 +11,8 @@ interface UserPanelProps {
 }
 
 interface UserPanelStates {
-    promoCode: string
+    promoCode: string,
+    isCompleted: boolean
 }
 
 export default class UserPanel extends React.Component<UserPanelProps, UserPanelStates> {
@@ -23,6 +25,7 @@ export default class UserPanel extends React.Component<UserPanelProps, UserPanel
         super(props);
         this.state = {
             promoCode: this.getPromoCode(),
+            isCompleted: false
         };
     }
     getPromoCode() {
@@ -36,6 +39,11 @@ export default class UserPanel extends React.Component<UserPanelProps, UserPanel
     }
     onClickButtonPromoCode(event) {
         localStorage.setItem('promoCode', this.state.promoCode);
+        this.setState({isCompleted: true});
+        event.preventDefault();
+    }
+    codePromoIsCompleted() {
+        return this.state.isCompleted ? <Redirect to="/purchase"/> : <div/>;
     }
     getCorrectInputPromoCode() {
         if (localStorage.getItem('stations') === null) {
@@ -62,6 +70,7 @@ export default class UserPanel extends React.Component<UserPanelProps, UserPanel
     render() {
         return (
             <div className="card">
+                {this.codePromoIsCompleted()}
                 <img src={'https://www.gravatar.com/avatar/' + md5(this.props.email) + '?s=286'}
                      className="card-img-top" alt="hello"/>
                 <div className="card-body">

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Redirect } from 'react-router-dom';
 import './purchaseBlock.css';
 
 interface PurchaseBlockProps {
@@ -7,7 +8,8 @@ interface PurchaseBlockProps {
 }
 
 interface PurchaseBlockStates {
-    priceTicket: number
+    priceTicket: number,
+    isBought: boolean
 }
 
 export default class PurchaseBlock extends Component<PurchaseBlockProps, PurchaseBlockStates> {
@@ -15,6 +17,7 @@ export default class PurchaseBlock extends Component<PurchaseBlockProps, Purchas
         super(props);
         this.state = {
             priceTicket: 20,
+            isBought: false
         };
     }
     getListStationsPurchased() {
@@ -33,6 +36,8 @@ export default class PurchaseBlock extends Component<PurchaseBlockProps, Purchas
     }
     onClickBuyingButton(event) {
         this.saveStationBought();
+        this.setState({isBought: true});
+        event.preventDefault();
     }
     getPriceReduction() {
         const promoCode = localStorage.getItem('promoCode');
@@ -47,9 +52,13 @@ export default class PurchaseBlock extends Component<PurchaseBlockProps, Purchas
             </div>
         );
     }
+    ticketIsBought() {
+        return this.state.isBought ? <Redirect to="/profile"/> : <div/>;
+    }
     render() {
         return (
             <div className="row schedule">
+                {this.ticketIsBought()}
                 <div className="col-lg-3">
                     <p>{this.props.departureStation}</p>
                     <hr/>
