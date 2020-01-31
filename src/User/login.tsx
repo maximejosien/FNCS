@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import './login.css';
 
 interface LoginProps {
+    setConnected: any,
+    handleGoHomeIfUserIsConnected: any
 }
 
 interface LoginState {
@@ -27,7 +29,7 @@ export default class Login extends Component<LoginProps, LoginState> {
             password: event.target.value
         });
     }
-    async login() {
+    async login(event) {
         const loginResponse = this.fetchLogin();
         const responseJson = (await loginResponse).json();
 
@@ -37,7 +39,9 @@ export default class Login extends Component<LoginProps, LoginState> {
 
         localStorage.setItem('auth_token', (await responseJson).token);
         localStorage.setItem('email', this.state.email);
-        window.location.assign("/purchase");
+
+        this.props.setConnected(true);
+
     }
     fetchLogin() {
         return fetch('https://reqres.in/api/login', {
@@ -53,12 +57,13 @@ export default class Login extends Component<LoginProps, LoginState> {
         });
     }
     onSubmitForm(event) {
-        this.login();
+        this.login(event);
         event.preventDefault();
     }
     render() {
         return (
             <div className="container">
+                {this.props.handleGoHomeIfUserIsConnected}
                 <div className="row">
                   <form id="formLogin" onSubmit={this.onSubmitForm.bind(this)}>
                     <input type="text" className="form-control" placeholder="Email" defaultValue={this.state.email} onChange={this.onChangeEmail.bind(this)}/>
